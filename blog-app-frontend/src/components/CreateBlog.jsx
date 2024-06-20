@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const CreateBlog = () => {
-    const [html, setHtml] = useState('');
     const [imageId, setImageId] = useState('');
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
 
-    function onChange(e) {
-        setHtml(e.target.value);
-    }
+   
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
@@ -31,13 +28,13 @@ const CreateBlog = () => {
             const result = await res.json();
 
             if (!res.ok) {
-                throw new Error(result.errors.image || 'Failed to upload image');
+                throw new Error(result.errors.image || 'Gagal mengupload image');
             } else {
                 setImageId(result.image.id);
             }
         } catch (error) {
             console.error('Error uploading image:', error);
-            alert('Failed to upload image. Please try again.');
+            alert('Gagal upload gambar. Tolong Coba lagi.');
             e.target.value = null;
         }
     };
@@ -69,21 +66,21 @@ const CreateBlog = () => {
             const result = await res.json();
 
             if (!res.ok) {
-                throw new Error(result.message || 'Failed to create blog');
+                throw new Error(result.message || 'gagal menambahkan blog');
             }
 
-            toast.success("Blog added successfully.");
+            toast.success("Blog berhasil ditambahkan.");
             navigate('/');
         } catch (error) {
-            console.error('Error creating blog:', error);
-            toast.error('Failed to create blog. Please try again.');
+            console.error('gagal membuat blog:', error);
+            toast.error('gagal menambahkan blog. Tolong coba lagi.');
         }
     };
 
     return (
         <div className='container mb-5'>
             <div className="d-flex justify-content-between pt-5 mb-4">
-                <h4>Create Blog</h4>
+                <h4>Buat Blog</h4>
                 <Link to="/" className='btn btn-dark'>Back</Link>
             </div>
             <div className='card border-0 shadow-lg'>
@@ -97,10 +94,10 @@ const CreateBlog = () => {
                                 className={`form-control ${errors.title && 'is-invalid'}`} 
                                 placeholder='Title' 
                             />
-                            {errors.title && <p className='invalid-feedback'>Title field is required</p>}
+                            {errors.title && <p className='invalid-feedback'>Judul harus diisi</p>}
                         </div>
                         <div className="mb-3">
-                            <label className='form-label'>Short Description</label>
+                            <label className='form-label'>Short Deskripsi</label>
                             <textarea 
                                 { ...register('shortDesc') } 
                                 cols="20" rows="2" 
@@ -108,7 +105,7 @@ const CreateBlog = () => {
                             ></textarea>
                         </div>
                         <div className="mb-3">
-                            <label className='form-label'>Description</label>
+                            <label className='form-label'>Deskripsi</label>
                             <textarea 
                                 { ...register('description') } 
                                 cols="50" rows="8 " 
@@ -116,8 +113,8 @@ const CreateBlog = () => {
                             ></textarea>
                         </div>
                         <div className='mb-3'>
-                            <label className='form-label'>Image</label><br/>
-                            <input onChange={handleFileChange} type="file" />
+                            <label className='form-label'>Foto</label><br/>
+                            <input onChange={handleFileChange} type="file" required />
                         </div>
                         <div className="mb-3">
                             <label className='form-label'>Author</label>
@@ -127,7 +124,7 @@ const CreateBlog = () => {
                                 className={`form-control ${errors.author && 'is-invalid'}`} 
                                 placeholder='Author' 
                             />
-                            {errors.author && <p className='invalid-feedback'>Author field is required</p>}
+                            {errors.author && <p className='invalid-feedback'>Author harus diisi</p>}
                         </div>
                         <button className='btn btn-dark'>Create</button>
                     </div>

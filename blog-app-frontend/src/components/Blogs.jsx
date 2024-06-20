@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import BlogCard from './BlogCard';
 import { useAuth } from './AuthContext';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Import Cookies
 
 const Blogs = () => {

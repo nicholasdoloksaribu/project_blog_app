@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Editor from 'react-simple-wysiwyg';
+import  { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -10,18 +9,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
     const {
         register,
         handleSubmit,
-        watch,
         reset,
         formState: { errors },
     } = useForm();
 
-    const [html, setHtml] = useState('');
     const [imageId, setImageId] = useState('');
     const navigate = useNavigate();
 
-    function onChange(e) {
-        setHtml(e.target.value);
-    } 
+    
 
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
@@ -73,14 +68,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
             if (!res.ok) {
                 const result = await res.json();
-                throw new Error(result.message || 'gagal menambahkan blog');
+                throw new Error(result.message || 'gagal mengubah blog');
             }
 
-            toast.success("Blog berhasil diupdate.");
+            toast.success("Blog berhasil diubah.");
             navigate('/');
         } catch (error) {
             console.error('Error creating blog:', error);
-            toast.error('Failed to create blog. Please try again.');
+            toast.error('gagal mengubah blog. tolong coba lagi.');
         }
     };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -41,7 +40,7 @@ const BlogCard = ({ blog, blogs, setBlogs }) => {
           <h2 className="h5">{blog.title}</h2>
           <p>{blog.shortDesc}</p>
           <div className="d-flex justify-content-between">
-            <Link to={`/blog/${blog.id}`} className='btn btn-dark'>Details</Link>
+            <Link to={`/blog/${blog.id}`} className='btn btn-dark'>Detail</Link>
             {isAuthenticated && (
               <>
               <Link className='text-danger' onClick={() => handleDeleteClick(blog.id)}>
