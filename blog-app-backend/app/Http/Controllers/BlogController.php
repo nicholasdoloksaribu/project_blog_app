@@ -35,7 +35,7 @@ class BlogController extends Controller
     {
         //
         $validator =Validator::make($request->all(),[
-            'title'=>'required|min:10',
+            'title'=>'required|min:3',
             'author'=>'required|min:3',
         ]);
 
